@@ -1,0 +1,39 @@
+[project]
+name = "clober-audio"
+version = "0.1.0"
+description = "Clober audio sidecar: wake word, push-to-talk, VAD, STT and TTS"
+readme = "README.md"
+authors = [
+    { name = "potgon", email = "otgon.petru@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "faster-whisper>=1.2.1",
+    "numpy>=2.5.3",
+    "pynput>=1.8.2",
+    "sounddevice>=0.5.6",
+    "websockets>=17.1",
+]
+
+[project.scripts]
+clober-audio = "clober_audio:main"
+
+[build-system]
+requires = ["uv_build>=0.11.8,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.10",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

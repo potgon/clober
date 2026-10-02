@@ -110,7 +110,7 @@ Vienen del PRD; donde el PRD daba opciones, aquí está la elegida.
 | Runtime sidecar | Python 3.12 gestionado con `uv` | `sidecar-audio/pyproject.toml` |
 | Captura/salida de audio | `sounddevice` (PortAudio) | 16 kHz mono para captura |
 | Wake word | `openwakeword` (ONNX) | |
-| VAD | `silero-vad` (ONNX) | Fin de frase = 500 ms de silencio, máx. 10 s |
+| VAD | Silero ONNX incluido en `faster-whisper` (sin torch) | Fin de frase = 500 ms de silencio, máx. 10 s |
 | STT | `faster-whisper`, `compute_type="int8"`, CPU | Modelo según medida F0.6 |
 | TTS | `piper-tts`; voces `es_ES-davefx-medium` y `en_US-lessac-medium` | Solo a auriculares |
 | Push-to-talk | `pynput` (hotkey global, sin admin) | Por defecto `ctrl+shift+space`, mantener pulsado |

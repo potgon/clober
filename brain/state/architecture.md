@@ -51,7 +51,7 @@ Fijado en [[2026-10-02-stack-y-estructura-del-monorepo]]: Node 24, pnpm 10,
 TS strict, Vitest, Biome, zod 4; obs-websocket-js 5; Twurple 7 con EventSub
 WS y Device Code Flow propio; adaptadores LLM `anthropic` y
 `openai-compatible` (OpenAI + Ollama); Python 3.12 con uv, sounddevice,
-openWakeWord, silero-vad, faster-whisper int8, Piper; React 19 + Vite +
+openWakeWord, Silero VAD (el ONNX que incluye faster-whisper, sin torch), faster-whisper int8, Piper; React 19 + Vite +
 Tailwind 4; instalador Inno Setup. Licencia MIT.
 
 ## Valores medidos
