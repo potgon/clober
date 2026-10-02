@@ -1,0 +1,22 @@
+{
+  "name": "@clober/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@clober/shared": "workspace:*",
+    "@clober/policy": "workspace:*",
+    "@clober/mcp-obs": "workspace:*"
+  },
+  "scripts": {
+    "dev": "tsx watch --conditions=development src/index.ts",
+    "start": "node dist/index.js"
+  }
+}

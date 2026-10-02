@@ -24,7 +24,7 @@ dependencias `hecha`.
 
 | Tarea | Estado | Notas |
 | --- | --- | --- |
-| F0.1 Andamiaje del monorepo | pendiente | |
+| F0.1 Andamiaje del monorepo | hecha | `pnpm build && pnpm test && pnpm lint` en verde |
 | F0.2 CI | pendiente | |
 | F0.3 Esquemas compartidos | pendiente | |
 | F0.4 Sidecar mínimo (PTT + VAD + STT) | pendiente | |
