@@ -60,7 +60,11 @@ Se rellenan con las medidas de F0/F1 (ver `roadmap.md`, "Resultados de
 medidas"):
 
 - Modelo STT por defecto: pendiente de F0.6.
-- CPU en reposo: pendiente de F0.7.
+- CPU en reposo: 0,35 % de la máquina, RAM 344 MB (F0.7, 2026-10-02).
+- openWakeWord fijado en 0.4.x: la 0.6 exige `tflite-runtime`, sin wheels
+  para Python 3.12. La 0.4 trae los modelos preentrenados en ONNX.
+- Whisper se carga primero de la caché local (sin consultar Hugging Face);
+  solo descarga si el modelo no está.
 
 ## Project brain — acceso vía MCP
 

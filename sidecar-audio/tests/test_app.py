@@ -4,12 +4,14 @@ import asyncio
 import json
 
 import numpy as np
+from conftest import load_wav
 from test_stt import normalize
 from websockets.asyncio.server import serve
 
-from clober_audio.app import AudioApp, Settings
+from clober_audio.app import AudioApp, Settings, State
 from clober_audio.client import CoreClient, next_backoff
-from clober_audio.vad import CHUNK_SAMPLES
+from clober_audio.vad import CHUNK_SAMPLES, SileroVad
+from clober_audio.wakeword import WakeWordDetector
 
 TOKEN = "test-token"
 
@@ -100,3 +102,54 @@ def test_too_short_press_is_cancelled():
 
     sent = asyncio.run(scenario())
     assert [m["type"] for m in sent] == ["wake", "listen_cancelled"]
+
+
+def test_wake_word_utterance_is_cut_by_vad():
+    audio = load_wav("hey_jarvis_escena_juego.wav")
+    # 2 s of silence after the command: the endpointer must stop on its own.
+    audio = np.concatenate([audio, np.zeros(32_000, dtype=np.float32)])
+
+    class Recorder:
+        def __init__(self):
+            self.transcribed = None
+
+        def transcribe(self, clip):
+            self.transcribed = clip
+            return "pon la escena juego"
+
+    async def scenario():
+        sent: list[dict] = []
+        earcons: list[str] = []
+
+        async def send(msg):
+            sent.append(msg)
+
+        recorder = Recorder()
+        app = AudioApp(
+            settings(1),
+            recorder,
+            send,
+            detector=WakeWordDetector(),
+            vad=SileroVad(),
+            earcon=earcons.append,
+        )
+        app.attach(asyncio.get_running_loop())
+        for chunk in audio[: len(audio) // CHUNK_SAMPLES * CHUNK_SAMPLES].reshape(
+            -1, CHUNK_SAMPLES
+        ):
+            app._chunk(chunk)  # same as on_chunk, without the thread hop
+        await wait_for(lambda: any(m["type"] == "transcript" for m in sent), timeout=10)
+        return sent, earcons, recorder, app
+
+    sent, earcons, recorder, app = asyncio.run(scenario())
+    assert [m["type"] for m in sent] == ["wake", "transcript"]
+    assert sent[0]["source"] == "wakeword" and sent[0]["score"] >= 0.5
+    assert earcons == ["wake"]
+    assert app.state is State.IDLE
+    # The clip ends shortly after the speech, not at the end of the trailing silence.
+    seconds = len(recorder.transcribed) / 16_000
+    assert 1.0 < seconds < 3.0
+    # Audio is fed faster than real time here, so compare audio durations only:
+    # speech end = wake + recorded audio - trailing silence.
+    t = sent[1]
+    assert 1_000 < t["t_speech_end"] - t["t_wake"] < seconds * 1000

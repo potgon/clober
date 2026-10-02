@@ -82,6 +82,11 @@ class Endpointer:
         self.speech_started = False
         self._silence_run_ms = 0
 
+    @property
+    def trailing_silence_ms(self) -> int:
+        """Silence since the last speech chunk (0 while speaking)."""
+        return self._silence_run_ms
+
     def push(self, prob: float) -> EndReason | None:
         self.elapsed_ms += self.chunk_ms
         if prob >= self.threshold:
