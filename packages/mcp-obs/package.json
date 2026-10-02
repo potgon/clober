@@ -11,6 +11,8 @@
     }
   },
   "dependencies": {
-    "@clober/shared": "workspace:*"
+    "@clober/shared": "workspace:*",
+    "obs-websocket-js": "^5.0.8",
+    "zod": "^4.6.5"
   }
 }
