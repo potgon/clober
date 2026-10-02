@@ -29,9 +29,9 @@ dependencias `hecha`.
 | F0.3 Esquemas compartidos | hecha | `packages/shared`: protocolo, ToolDefinition, políticas, config, registro |
 | F0.4 Sidecar mínimo (PTT + VAD + STT) | hecha (sin verificar en vivo) | 16 tests (incluido wav → STT → WS); arranque real con micro y hotkey comprobado; falta decir la orden con voz humana |
 | F0.5 Núcleo mínimo (servidor + atajo + OBS) | hecha (sin verificar en vivo) | 24 casos de ruta rápida; núcleo y sidecar reales conectados; falta probar con OBS abierto |
-| F0.6 Medida y elección del modelo STT | bloqueada (T3: grabar 30 frases) | |
-| F0.7 Wake word de prueba y CPU en reposo | pendiente | |
-| F0.8 Puerta G1 | pendiente | |
+| F0.6 Medida y elección del modelo STT | bloqueada (T3: grabar 30 frases) | `scripts/bench_stt.py` y grabador `scripts/record_clips.py` listos; instrucciones en `evals/audio/poc/README.md` |
+| F0.7 Wake word de prueba y CPU en reposo | hecha | `hey_jarvis` como marcador; CPU en reposo 0,35 % (ver medidas) |
+| F0.8 Puerta G1 | pendiente | `pnpm latency-report` listo; faltan las 30 órdenes con OBS abierto |
 
 ### F1
 
@@ -68,7 +68,11 @@ empezar F2.
 Aquí se apuntan los números que fijan defaults (modelo STT, CPU en reposo,
 latencia de G1/G2, activaciones falsas, acierto de evals), con fecha.
 
-- (ninguno todavía)
+- **2026-10-02 — CPU y RAM del sidecar en reposo (F0.7).** PC de Petru
+  (Ryzen 7 5700G, 16 hilos), 5 min escuchando solo la palabra de activación
+  (`hey_jarvis`), STT `base` cargado: CPU 0,35 % de la máquina de media,
+  0,59 % p95 (5,6 % de un núcleo); RAM 344 MB. Objetivos PRD: < 2 % y
+  < 1,5 GB → **cumple**. `uv run scripts/idle_cpu.py`.
 
 ## Decisiones abiertas (sin resolver)
 

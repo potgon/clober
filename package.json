@@ -11,7 +11,8 @@
     "test": "vitest run",
     "lint": "biome check .",
     "format": "biome check --write .",
-    "dev": "pnpm --filter @clober/core dev"
+    "dev": "pnpm --filter @clober/core dev",
+    "latency-report": "tsx --conditions=development apps/core/scripts/latency-report.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
