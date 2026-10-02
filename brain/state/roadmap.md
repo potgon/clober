@@ -25,7 +25,7 @@ dependencias `hecha`.
 | Tarea | Estado | Notas |
 | --- | --- | --- |
 | F0.1 Andamiaje del monorepo | hecha | `pnpm build && pnpm test && pnpm lint` en verde |
-| F0.2 CI | pendiente | |
+| F0.2 CI | hecha (sin verificar en vivo) | workflow escrito; no se ha hecho push, pendiente de ver el primer run en GitHub |
 | F0.3 Esquemas compartidos | pendiente | |
 | F0.4 Sidecar mínimo (PTT + VAD + STT) | pendiente | |
 | F0.5 Núcleo mínimo (servidor + atajo + OBS) | pendiente | |
