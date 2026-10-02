@@ -1,0 +1,19 @@
+{
+  "name": "clober-brain-mcp",
+  "version": "1.0.0",
+  "description": "MCP server exposing /brain of Clober to Claude Code and Claude.ai",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:http": "node src/http.js",
+    "test": "node src/core.selfcheck.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.6.5"
+  }
+}

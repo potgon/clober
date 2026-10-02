@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "clober-brain": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["mcp-server/src/index.js"],
+      "env": {}
+    }
+  }
+}
