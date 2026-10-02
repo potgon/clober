@@ -11,12 +11,17 @@
     }
   },
   "dependencies": {
-    "@clober/shared": "workspace:*",
+    "@clober/mcp-obs": "workspace:*",
     "@clober/policy": "workspace:*",
-    "@clober/mcp-obs": "workspace:*"
+    "@clober/shared": "workspace:*",
+    "ws": "^8.22.0",
+    "zod": "^4.6.5"
   },
   "scripts": {
     "dev": "tsx watch --conditions=development src/index.ts",
     "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.2"
   }
 }

@@ -28,7 +28,7 @@ dependencias `hecha`.
 | F0.2 CI | hecha (sin verificar en vivo) | workflow escrito; no se ha hecho push, pendiente de ver el primer run en GitHub |
 | F0.3 Esquemas compartidos | hecha | `packages/shared`: protocolo, ToolDefinition, políticas, config, registro |
 | F0.4 Sidecar mínimo (PTT + VAD + STT) | hecha (sin verificar en vivo) | 16 tests (incluido wav → STT → WS); arranque real con micro y hotkey comprobado; falta decir la orden con voz humana |
-| F0.5 Núcleo mínimo (servidor + atajo + OBS) | pendiente | |
+| F0.5 Núcleo mínimo (servidor + atajo + OBS) | hecha (sin verificar en vivo) | 24 casos de ruta rápida; núcleo y sidecar reales conectados; falta probar con OBS abierto |
 | F0.6 Medida y elección del modelo STT | bloqueada (T3: grabar 30 frases) | |
 | F0.7 Wake word de prueba y CPU en reposo | pendiente | |
 | F0.8 Puerta G1 | pendiente | |

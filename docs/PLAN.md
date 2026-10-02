@@ -520,11 +520,14 @@ antes de cualquier tarea de F1.
     `SceneListChanged`/`CurrentProgramSceneChanged`.
   - `mcp-obs/src/tools.ts`: solo `obs_set_scene` en F0.
   - `core/src/router/fastpath.ts`: normaliza (minúsculas, sin tildes, sin
-    puntuación, quita la palabra de activación inicial) y reconoce
-    `^(escena|pon la escena|cambia a la escena|scene|switch to)\s+(.+)$`.
-    Match del nombre con `fastest-levenshtein`: similitud
-    `1 − dist/max(len)` ≥ 0,75 contra escenas normalizadas; empate o < 0,75
-    = no match.
+    puntuación), quita la palabra de activación inicial y busca la palabra
+    clave `escena`/`scene` entre las 4 primeras palabras, con similitud de
+    palabra ≥ 0,75 (Whisper confunde "escena" con "estena" y "pon" con
+    "por", así que un regex exacto falla). Lo que sigue a la clave es el
+    nombre. Match del nombre con `shared/src/match.ts`
+    (`fastest-levenshtein`, números en palabra → dígitos): similitud
+    `1 − dist/max(len)` ≥ 0,75 contra el nombre entero o contra un tramo de
+    palabras del nombre (×0,95); empate o < 0,75 = no match.
   - Registro JSONL (§5.6) desde el primer día.
   - En F0 la contraseña de OBS se lee de la variable `CLOBER_OBS_PASSWORD`.
 - **Hecho cuando:** tests de `fastpath` (≥ 15 casos es/en, incluidos
@@ -606,7 +609,7 @@ Orden recomendado: las tareas están numeradas en orden de ejecución.
 ### F1.5 — Herramientas OBS (1–8)
 - **Hacer:** las 8 herramientas `obs_*` de §5.7 en `mcp-obs/src/tools.ts`
   con su `undo`. Match aproximado de nombres con la misma función de
-  similitud que `fastpath` (moverla a `shared/src/match.ts`). `bin.ts` MCP
+  similitud que `fastpath` (`shared/src/match.ts`). `bin.ts` MCP
   stdio.
 - **Hecho cuando:** tests con un cliente OBS simulado (interfaz pequeña
   `ObsLike` inyectada) cubren cada herramienta y su `undo`;
